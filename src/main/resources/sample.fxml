@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <children>
+        <Label fx:id="songLabel" alignment="CENTER" prefHeight="46.0" prefWidth="600.0" text="Label" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <ProgressBar fx:id="songProgressBar" layoutY="46.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+        <Button fx:id="playBTN" layoutY="64.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="46.0" prefWidth="76.0" text="PLAY" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+        <Button fx:id="pauseBTN" layoutX="77.0" layoutY="65.0" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="46.0" prefWidth="76.0" text="PUSE" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+        <Button fx:id="rewBTN" layoutX="153.0" layoutY="64.0" mnemonicParsing="false" onAction="#rewriteMedia" prefHeight="46.0" prefWidth="76.0" text="REW" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+        <Button fx:id="ffwBTN" layoutX="229.0" layoutY="64.0" mnemonicParsing="false" onAction="#forwardMedia" prefHeight="46.0" prefWidth="76.0" text="FFW" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+        <Button fx:id="resetBTN" layoutX="305.0" layoutY="64.0" mnemonicParsing="false" onAction="#resetMedia" prefHeight="46.0" prefWidth="76.0" text="RESET" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+        <Slider fx:id="volumeSlider" layoutX="381.0" layoutY="96.0" max="100" orientation="VERTICAL" prefHeight="104.0" prefWidth="31.0" value="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+      <Button fx:id="radioOnBTN" layoutX="381.0" layoutY="64.0" mnemonicParsing="false" onAction="#playRadio" prefHeight="46.0" prefWidth="76.0" text="Radio On" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+      <Button fx:id="radioOffBTN" layoutX="457.0" layoutY="64.0" mnemonicParsing="false" onAction="#stopRadio" prefHeight="46.0" prefWidth="76.0" text="Radio Off" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+    </children>
+
+</AnchorPane>
