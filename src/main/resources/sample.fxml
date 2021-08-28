@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <children>
@@ -12,9 +13,21 @@
         <Button fx:id="rewBTN" layoutX="153.0" layoutY="64.0" mnemonicParsing="false" onAction="#rewriteMedia" prefHeight="46.0" prefWidth="76.0" text="REW" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
         <Button fx:id="ffwBTN" layoutX="229.0" layoutY="64.0" mnemonicParsing="false" onAction="#forwardMedia" prefHeight="46.0" prefWidth="76.0" text="FFW" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
         <Button fx:id="resetBTN" layoutX="305.0" layoutY="64.0" mnemonicParsing="false" onAction="#resetMedia" prefHeight="46.0" prefWidth="76.0" text="RESET" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
-        <Slider fx:id="volumeSlider" layoutX="381.0" layoutY="96.0" max="100" orientation="VERTICAL" prefHeight="104.0" prefWidth="31.0" value="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
-      <Button fx:id="radioOnBTN" layoutX="381.0" layoutY="64.0" mnemonicParsing="false" onAction="#playRadio" prefHeight="46.0" prefWidth="76.0" text="Radio On" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
-      <Button fx:id="radioOffBTN" layoutX="457.0" layoutY="64.0" mnemonicParsing="false" onAction="#stopRadio" prefHeight="46.0" prefWidth="76.0" text="Radio Off" AnchorPane.bottomAnchor="62.0" AnchorPane.topAnchor="64.0" />
+        <Slider fx:id="volumeSlider" layoutX="548.0" layoutY="66.0" max="100" orientation="VERTICAL" prefHeight="104.0" prefWidth="31.0" value="50.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="66.0" />
+      <Button fx:id="radioOffBTN" layoutX="457.0" layoutY="64.0" mnemonicParsing="false" onAction="#stopRadio" prefHeight="46.0" prefWidth="76.0" text="Radio Off" AnchorPane.bottomAnchor="62.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="64.0" />
+      <Label fx:id="currentLabel" layoutX="14.0" layoutY="29.0" prefHeight="17.0" prefWidth="41.0" text="Label" />
+      <Label fx:id="endLabel" layoutX="538.0" layoutY="29.0" prefHeight="17.0" prefWidth="51.0" text="Label" />
+      <Button fx:id="europaBTN" layoutY="119.0" mnemonicParsing="false" onAction="#setEuropa" prefHeight="25.0" prefWidth="76.0" text="EUROPA+" />
+      <Button fx:id="recordBTN" layoutX="76.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRecord" prefHeight="25.0" prefWidth="76.0" text="RECORD" />
+      <Button fx:id="piterFMBTN" layoutX="152.0" layoutY="119.0" mnemonicParsing="false" onAction="#setPiterFM" prefHeight="25.0" prefWidth="76.0" text="Питер ФМ" />
+      <Button fx:id="hitFMBTN" layoutX="228.0" layoutY="119.0" mnemonicParsing="false" onAction="#setHit" prefHeight="25.0" prefWidth="76.0" text="Хит FM" />
+      <Button fx:id="MCBTN" layoutX="305.0" layoutY="119.0" mnemonicParsing="false" onAction="#setMonte" prefHeight="25.0" prefWidth="76.0" text="Monte-Carlo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="radio7BTN" layoutX="381.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRadioSeven" prefHeight="25.0" prefWidth="76.0" text="Радио 7" />
+      <Button fx:id="retroBTN" layoutX="457.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRetroFM" prefHeight="25.0" prefWidth="76.0" text="Ретро FM" />
     </children>
 
 </AnchorPane>

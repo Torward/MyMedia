@@ -1,12 +1,10 @@
+import com.goxr3plus.streamplayer.stream.StreamPlayer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -14,13 +12,21 @@ import javazoom.jl.player.Player;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 
-public class Controller implements Initializable {
+public class Controller extends StreamPlayer implements Initializable {
+    public Label buffering;
+    public TextField addresString;
+    public Label currentLabel;
+    public Label endLabel;
+    public Button europaBTN;
+    public Button piterFMBTN;
+    public Button hitFMBTN;
+    public Button MCBTN;
+    public Button retroBTN;
+    public Button recordBTN;
+    public Button radio7BTN;
     @FXML
     private Button radioOnBTN;
     @FXML
@@ -32,9 +38,17 @@ public class Controller implements Initializable {
     private Timer timer;
     private TimerTask task;
     private boolean running;
-    private boolean starting = false;
-    private boolean prepared = false;
-    private String stream = "https://maximum.hostingradio.ru/maximum96.aacp";
+    private Thread thread;
+    private String addres;
+
+
+    private final String record = "https://hls-01-radiorecord.hostingradio.ru/record/playlist.m3u8";
+    private final String retro = "https://hls-01-retro.emgsound.ru/12/playlist.m3u8";
+    private final String relax = "https://hls-01-radio7.emgsound.ru/13/playlist.m3u8";
+    private final String piterFM = "https://piterfm-hls.cdnvideo.ru/piterfm-live/piterfm.stream/playlist.m3u8";
+    private final String hitFm = "http://c34.radioboss.fm:8126/mp3";
+    private final String monteCarlo = "https://montecarlo.hostingradio.ru/montecarlo96.aacp";
+    private final String europaPlus = "https://hls-02-europaplus.emgsound.ru/11/128/playlist.m3u8";
 
     @FXML
     private Label songLabel;
@@ -55,10 +69,14 @@ public class Controller implements Initializable {
 
     private Media media;
     private MediaPlayer mediaPlayer;
+    private Player player;
 
     public void playMedia() {
         beginTimer();
+        media = new Media(songs.get(songNumber).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+
     }
 
     public void pauseMedia() {
@@ -93,7 +111,7 @@ public class Controller implements Initializable {
         if (songNumber < songs.size() - 1) {
             songNumber++;
             mediaPlayer.stop();
-            if (running){
+            if (running) {
                 cancelTimer();
             }
             media = new Media(songs.get(songNumber).toURI().toString());
@@ -103,7 +121,7 @@ public class Controller implements Initializable {
         } else {
             songNumber = 0;
             mediaPlayer.stop();
-            if (running){
+            if (running) {
                 cancelTimer();
             }
             media = new Media(songs.get(songNumber).toURI().toString());
@@ -117,6 +135,7 @@ public class Controller implements Initializable {
         songProgressBar.setProgress(0);
         mediaPlayer.seek(Duration.seconds(0.0));
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -140,14 +159,11 @@ public class Controller implements Initializable {
         });
         songProgressBar.setStyle("-fx-background: #000000;");
         songProgressBar.setStyle("-fx-accent: #FF0000;");
-//        Console con = System.console();
-//        String urlString = con.readLine("Введите адрес радиопотока: ");
-
-
     }
 
     public void beginTimer() {
         timer = new Timer();
+
         task = new TimerTask() {
             @Override
             public void run() {
@@ -160,6 +176,7 @@ public class Controller implements Initializable {
                 }
             }
         };
+
         timer.scheduleAtFixedRate(task, 0, 1000);
     }
 
@@ -168,32 +185,90 @@ public class Controller implements Initializable {
         timer.cancel();
     }
 
-    public void playRadio(ActionEvent actionEvent) {
-        // Европа-Плюс
-        String urlString = "https://maximum.hostingradio.ru/maximum96.aacp";
-        Console con = System.console();
-        //String urlString = con.readLine("Введите url радио потока: ");
-        try {
-            URL url = new URL(urlString);
-            InputStream fin = url.openStream();
-            InputStream is = new BufferedInputStream(fin);
+    //Radio
+    public boolean isRunning() {
+        return thread != null;
+    }
 
-            Player player;
-            player = new Player(is);
-            player.play();
+    public void playRadio() {
+        thread = new Thread(() -> {
+            Console con = System.console();
+
+            String urlString = addres;
+            try {
+                URL url = new URL(urlString);
+                media = new Media(urlString);
+                url.openStream();
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+    }
+
+    public void stop() {
+        if (isRunning()) {
+            thread.interrupt();
+            thread = null;
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+            }
         }
-        catch (FileNotFoundException e)
-        {
-            con.printf("Url %s не найден:", urlString);
-        }
-        catch (Exception e)
-        {
-            con.printf("При проигрывании с потока %s возникла следующая ошибка:", urlString);
-            con.printf(e.toString());
-        }
+    }
+
+    public void stopRadio() {
+        stop();
+    }
+
+    public void setEuropa(ActionEvent actionEvent) {
+        stopRadio();
+        addres = europaPlus;
+       thread = new Thread(this::playRadio);
+        thread.start();
 
     }
 
-    public void stopRadio(ActionEvent actionEvent) {
+    public void setRecord(ActionEvent actionEvent) {
+        stop();
+        addres = record;
+        thread = new Thread(this::playRadio);
+        thread.start();
+    }
+
+    public void setPiterFM(ActionEvent actionEvent) {
+        stop();
+        addres = piterFM;
+        thread = new Thread(this::playRadio);
+        thread.start();
+    }
+
+    public void setHit(ActionEvent actionEvent) {
+        stop();
+        addres = hitFm;
+        thread = new Thread(this::playRadio);
+        thread.start();
+    }
+
+    public void setMonte(ActionEvent actionEvent) {
+        stop();
+        addres = monteCarlo;
+        thread = new Thread(this::playRadio);
+        thread.start();
+    }
+
+    public void setRadioSeven(ActionEvent actionEvent) {
+        stop();
+        addres = relax;
+        thread = new Thread(this::playRadio);
+        thread.start();
+    }
+
+    public void setRetroFM(ActionEvent actionEvent) {
+        stop();
+        addres = retro;
+        thread = new Thread(this::playRadio);
+        thread.start();
     }
 }
