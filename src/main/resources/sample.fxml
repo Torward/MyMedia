@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <children>
@@ -20,14 +19,8 @@
       <Button fx:id="europaBTN" layoutY="119.0" mnemonicParsing="false" onAction="#setEuropa" prefHeight="25.0" prefWidth="76.0" text="EUROPA+" />
       <Button fx:id="recordBTN" layoutX="76.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRecord" prefHeight="25.0" prefWidth="76.0" text="RECORD" />
       <Button fx:id="piterFMBTN" layoutX="152.0" layoutY="119.0" mnemonicParsing="false" onAction="#setPiterFM" prefHeight="25.0" prefWidth="76.0" text="Питер ФМ" />
-      <Button fx:id="hitFMBTN" layoutX="228.0" layoutY="119.0" mnemonicParsing="false" onAction="#setHit" prefHeight="25.0" prefWidth="76.0" text="Хит FM" />
-      <Button fx:id="MCBTN" layoutX="305.0" layoutY="119.0" mnemonicParsing="false" onAction="#setMonte" prefHeight="25.0" prefWidth="76.0" text="Monte-Carlo">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-      <Button fx:id="radio7BTN" layoutX="381.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRadioSeven" prefHeight="25.0" prefWidth="76.0" text="Радио 7" />
-      <Button fx:id="retroBTN" layoutX="457.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRetroFM" prefHeight="25.0" prefWidth="76.0" text="Ретро FM" />
+      <Button fx:id="radio7BTN" layoutX="229.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRadioSeven" prefHeight="25.0" prefWidth="76.0" text="Радио 7" />
+      <Button fx:id="retroBTN" layoutX="305.0" layoutY="119.0" mnemonicParsing="false" onAction="#setRetroFM" prefHeight="25.0" prefWidth="76.0" text="Ретро FM" />
     </children>
 
 </AnchorPane>

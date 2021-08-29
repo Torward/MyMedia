@@ -10,8 +10,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javazoom.jl.player.Player;
 
+import javax.sound.sampled.AudioInputStream;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -22,8 +24,6 @@ public class Controller extends StreamPlayer implements Initializable {
     public Label endLabel;
     public Button europaBTN;
     public Button piterFMBTN;
-    public Button hitFMBTN;
-    public Button MCBTN;
     public Button retroBTN;
     public Button recordBTN;
     public Button radio7BTN;
@@ -46,8 +46,6 @@ public class Controller extends StreamPlayer implements Initializable {
     private final String retro = "https://hls-01-retro.emgsound.ru/12/playlist.m3u8";
     private final String relax = "https://hls-01-radio7.emgsound.ru/13/playlist.m3u8";
     private final String piterFM = "https://piterfm-hls.cdnvideo.ru/piterfm-live/piterfm.stream/playlist.m3u8";
-    private final String hitFm = "http://c34.radioboss.fm:8126/mp3";
-    private final String monteCarlo = "https://montecarlo.hostingradio.ru/montecarlo96.aacp";
     private final String europaPlus = "https://hls-02-europaplus.emgsound.ru/11/128/playlist.m3u8";
 
     @FXML
@@ -136,7 +134,6 @@ public class Controller extends StreamPlayer implements Initializable {
         mediaPlayer.seek(Duration.seconds(0.0));
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         songs = new ArrayList<File>();
@@ -192,15 +189,17 @@ public class Controller extends StreamPlayer implements Initializable {
 
     public void playRadio() {
         thread = new Thread(() -> {
-            Console con = System.console();
+
 
             String urlString = addres;
             try {
-                URL url = new URL(urlString);
-                media = new Media(urlString);
-                url.openStream();
+//                URL url = new URL(urlString);
+//                InputStream fin = url.openStream();
+//                InputStream is = new BufferedInputStream(fin);
+                media = new Media(addres);
                 mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.play();
+                System.out.println();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -225,7 +224,9 @@ public class Controller extends StreamPlayer implements Initializable {
     public void setEuropa(ActionEvent actionEvent) {
         stopRadio();
         addres = europaPlus;
-       thread = new Thread(this::playRadio);
+       thread = new Thread(()->{
+           playRadio();
+       });
         thread.start();
 
     }
@@ -240,20 +241,6 @@ public class Controller extends StreamPlayer implements Initializable {
     public void setPiterFM(ActionEvent actionEvent) {
         stop();
         addres = piterFM;
-        thread = new Thread(this::playRadio);
-        thread.start();
-    }
-
-    public void setHit(ActionEvent actionEvent) {
-        stop();
-        addres = hitFm;
-        thread = new Thread(this::playRadio);
-        thread.start();
-    }
-
-    public void setMonte(ActionEvent actionEvent) {
-        stop();
-        addres = monteCarlo;
         thread = new Thread(this::playRadio);
         thread.start();
     }
