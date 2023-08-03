@@ -5,7 +5,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 
 public class ConvertToMp3 {
-    public void ConvertFileToAIFF(String inputPath,
+    static void ConvertFileToAIFF(String inputPath,
                                   String outputPath) {
         AudioFileFormat inFileFormat;
         File inFile;

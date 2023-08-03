@@ -24,6 +24,31 @@
         <artifactId>jlayer</artifactId>
         <version>1.0.1</version>
     </dependency>
+<!--    <dependency>-->
+<!--        <groupId>net.java.dev.jna</groupId>-->
+<!--        <artifactId>jna</artifactId>-->
+<!--        <version>5.13.0</version>-->
+<!--    </dependency>-->
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>17.0.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-fxml</artifactId>
+        <version>21-ea+24</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-web</artifactId>
+        <version>21-ea+24</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-media</artifactId>
+        <version>21-ea+24</version>
+    </dependency>
     <dependency>
         <groupId>com.github.goxr3plus</groupId>
         <artifactId>java-stream-player</artifactId>
